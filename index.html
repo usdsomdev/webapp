@@ -262,13 +262,11 @@ mainBut.show()
 mainBut.enable()
 
 mainBut.onClick(function(e) {
-	document.getElementById("sum-textarea").value = document.getElementById("sum").innerHTML;
-	document.getElementById("course-textarea").value = document.getElementById("course").innerHTML;
-m
-yFormData = new FormData(document.getElementById("exchange"));
+document.getElementById("sum-textarea").value = document.getElementById("sum").innerHTML;
+document.getElementById("course-textarea").value = document.getElementById("course").innerHTML;
+myFormData = new FormData(document.getElementById("exchange"));
 data = JSON.stringify(Object.fromEntries(myFormData));
-
-	webApp.sendData(data); 
+webApp.sendData(JSON.stringify(data)); 
 });
 
 
