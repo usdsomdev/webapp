@@ -251,16 +251,19 @@ span.label.sum {
       </div>
     </div>
 <script>
-	var tg = window.Telegram.WebApp; //получаем объект webapp телеграма 
+var webApp = window.Telegram.WebApp
+var mainBut = webApp.MainButton
+mainBut.text = "Создать объявление"
+mainBut.isVisible = true
+mainBut.isActive = true
+mainBut.show()
+mainBut.enable()
 
-tg.MainButton.text = "Создать объявление"; //изменяем текст кнопки 
-//tg.MainButton.setText("Changed Text1"); //изменяем текст кнопки иначе
-//tg.MainButton.textColor = "#F55353"; //изменяем цвет текста кнопки
-//tg.MainButton.color = "#143F6B"; //изменяем цвет бэкграунда кнопки
-//tg.MainButton.setParams({"color": "#143F6B"}); //так изменяются все параметры 
-Telegram.WebApp.onEvent('mainButtonClicked', function(){
-	tg.sendData("some string that we need to send"); 
+mainBut.onClick(function(e) {
+	webApp.sendData("some string that we need to send"); 
 });
+
+
 	</script>
 </body>
 </html>
