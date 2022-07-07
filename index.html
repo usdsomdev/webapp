@@ -156,6 +156,7 @@ span.label.sum {
         <div class="col-4">
         	<span class="label sum">Сумма</span>
           <span role="textbox" inputmode="numeric" contenteditable class="editable-number" id="sum">10 000</span>
+		<textarea id="sum-textarea" style="display:none" name="sum"></textarea>
           <div class="currencies-wrapper">
             <ul class="currencies radio-buttons">
               <li>
@@ -196,6 +197,7 @@ span.label.sum {
                 <button onclick="decrementValue()">-</button>
               </div>
               <span role="textbox" inputmode="decimal" contenteditable class="editable-number" id="course">83.5</span>
+		<textarea id="course-textarea" style="display:none" name="course"></textarea>
               <div class="spinner">
                 <button onclick="incrementValue()">+</button>
               </div>
@@ -260,7 +262,13 @@ mainBut.show()
 mainBut.enable()
 
 mainBut.onClick(function(e) {
-	webApp.sendData("some string that we need to send"); 
+	document.getElementById("sum-textarea").value = document.getElementById("sum").innerHTML;
+	document.getElementById("course-textarea").value = document.getElementById("course").innerHTML;
+m
+yFormData = new FormData(document.getElementById("exchange"));
+data = JSON.stringify(Object.fromEntries(myFormData));
+
+	webApp.sendData(data); 
 });
 
 
