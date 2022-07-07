@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="simple-grid.min.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- <meta http-equiv="refresh" content="30" /> -->
+	<meta charset="utf-8">
+	<style type="text/css">
+* {
+    color: #606060;
+}
+body {
+    font-size: 11pt;
+}
+.editable-number {
+    font-size: 40pt;
+    display: inline-block;
+    max-width: 100%;
+    text-align: center;
+    border: none;
+    line-height: 75px;
+    margin: 0 5px;
+}
+span.editable-number:focus-visible {
+    outline: none;
+}
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+.calculated-sum {
+    color: #CFD6DD;
+    font-size: 0.8em;
+    margin-top: -20px;
+    display: block;
+}
+.btn {
+    background: #5EA7DE;
+    border-radius: 40px;
+    color: white;
+    text-align: center;
+    padding: 4px 26px;
+}
+.label {
+    display: block;
+    color: #A3ABB3;
+    font-size: 0.85em;
+    margin-top: 10px
+}
+.radio-buttons {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+  direction: rtl;
+}
+.currencies-wrapper::-webkit-scrollbar, .radio-buttons::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
+}
+.radio-buttons li {
+  margin: 0 5px 0 0;
+  height: 40px;
+  display: inline-block;
+  /*position: relative;*/
+}
+.radio-buttons.currencies {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+    height: 45px;
+    width: 95px;
+}
+.currencies li {
+    display: block;
+    float: left;
+}
+.radio-buttons label,
+.radio-buttons input {
+  display: block;
+}
+.radio-buttons input[type="radio"] {
+    opacity: 0.01;
+    z-index: 100;
+    height: 1px;
+    margin: 0;
+}
+.radio-buttons input[type="radio"]:checked+label,
+.Checked+label {
+  background: #5EA7DE;
+  color: white;
+}
+.radio-buttons label {
+  border-radius: 40px;
+  cursor: pointer;
+  z-index: 90;
+  background: #DDD;
+  color: #ACACAC;
+  padding: 5px 30px;
+}
+.radio-buttons.currencies label {
+  padding: 5px 15px;
+}
+span.label.sum {
+    text-align: center;
+}
+.row.center {
+    text-align: center;
+}
+.currencies-wrapper {
+    width: 79px;
+    overflow-x: scroll;
+    display: inline-block;
+    position: absolute;
+    margin-top: 20px;
+    /*-webkit-mask-image: linear-gradient(90deg, #000 60%, transparent);*/
+}
+.cities {
+    /*-webkit-mask-image: linear-gradient(-90deg, transparent, #000, transparent);*/
+}
+.spinner button {
+    background: #5ea7de;
+    color: white;
+    border: none;
+    border-radius: 40px;
+    font-size: 1em;
+    height: 40px;
+    width: 40px;
+}
+.spinner {
+    display: inline-block;
+}
+	</style>
+  <script type="text/javascript">
+    function incrementValue() {
+        var value = parseFloat(document.getElementById('course').innerHTML, 10);
+        value = isNaN(value) ? 0 : value;
+        value += 1;
+        document.getElementById('course').innerHTML = value;
+    }
+    function decrementValue() {
+        var value = parseFloat(document.getElementById('course').innerHTML, 10);
+        value = isNaN(value) ? 0 : value;
+        value -= 1;
+        document.getElementById('course').innerHTML = value;
+    }
+  </script>
+</head>
+<body>
+
+    <div class="container">
+      <div class="row center">
+        <div class="col-4">
+        	<span class="label sum">Сумма</span>
+          <span role="textbox" inputmode="numeric" contenteditable class="editable-number" id="sum">10 000</span>
+          <div class="currencies-wrapper">
+            <ul class="currencies radio-buttons">
+              <li>
+                <input type="radio" id="dollar" name="currency" checked="checked" />
+                <label for="dollar">$</label>
+              </li>
+              <li>
+                <input type="radio" id="rouble" name="currency" />
+                <label for="rouble">₽</label>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row center">
+        <div class="col-12">
+        	<span class="calculated-sum">85 500 сом</span>
+        </div>
+      </div>
+      <div class="row center">
+        <div class="col-12">
+    			<ul class="buy-sell-btns radio-buttons">
+            <li>
+              <input type="radio" id="sell" name="buy-sell" />
+              <label for="sell">Продать</label>
+            </li>
+    			  <li>
+    			    <input type="radio" id="buy" name="buy-sell" checked="checked" />
+    			    <label for="buy">Купить</label>
+    			  </li>
+    		  </ul>
+        </div>
+      </div>
+      <div class="row center">
+        <div class="col-4">
+          <span class="label">Курс</span>
+              <div class="spinner">
+                <button onclick="decrementValue()">-</button>
+              </div>
+              <span role="textbox" inputmode="decimal" contenteditable class="editable-number" id="course">83.5</span>
+              <div class="spinner">
+                <button onclick="incrementValue()">+</button>
+              </div>
+
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <span class="label">Место</span>
+    			<ul class="cities radio-buttons">
+            <li>
+              <input type="radio" id="a50" name="amount" />
+              <label for="a50">Ош</label>
+            </li>
+    			  <li>
+    			    <input type="radio" id="a25" name="amount" checked="checked"/>
+    			    <label for="a25">Бишкек</label>
+    			  </li>
+    			  <li>
+    			    <input type="radio" id="a75" name="amount" />
+    			    <label for="a75">Жалал-Абад</label>
+    			  </li>
+    			  <li>
+    			    <input type="radio" id="a100" name="amount" />
+    			    <label for="a100">Каракол</label>
+    			  </li>
+    			  <li>
+    			    <input type="radio" id="a110" name="amount" />
+    			    <label for="a110">Токмок</label>
+    			  </li>
+    			</ul>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <span class="label">Способ расчета</span>
+          <ul class="methods radio-buttons">
+            <li>
+              <input type="radio" id="cash" name="methods" checked="checked" />
+              <label for="cash">Наличные</label>
+            </li>
+            <li>
+              <input type="radio" id="card" name="methods"/>
+              <label for="card">Карта</label>
+            </li>
+            <li>
+              <input type="radio" id="transfer" name="methods" />
+              <label for="transfer">Перевод</label>
+            </li>
+          </ul>
+        </div>
+      </div>
+      </div>
+    </div>
+
+</body>
+</html>
+
+
