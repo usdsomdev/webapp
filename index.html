@@ -286,49 +286,35 @@ span.label.sum {
     </div>
 	<div id="demo"></div>
 	</form>
-<script>
-	
-	var x = document.getElementById("demo");
-function getLocation() {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(showPosition);
-  } else {
-    x.innerHTML = "Geolocation is not supported by this browser.";
-  }
-}
+    <script>
+        var webApp = window.Telegram.WebApp
+        var mainBut = webApp.MainButton
+        mainBut.text = "Создать объявление"
+        mainBut.isVisible = true
+        mainBut.isActive = true
+        mainBut.show()
+        mainBut.enable()
 
-function showPosition(position) {
-  x.innerHTML = "Latitude: " + position.coords.latitude +
-  "<br>Longitude: " + position.coords.longitude;
-}
-	// getLocation()
-var webApp = window.Telegram.WebApp
-var mainBut = webApp.MainButton
-mainBut.text = "Создать объявление"
-mainBut.isVisible = true
-mainBut.isActive = true
-mainBut.show()
-mainBut.enable()
+        mainBut.onClick(function(e) {
+          document.getElementById("sum-textarea").value = document.getElementById("sum").innerHTML;
+          document.getElementById("course-textarea").value = document.getElementById("course").innerHTML;
+          myFormData = new FormData(document.getElementById("exchange"));
+          data = JSON.stringify(Object.fromEntries(myFormData));
+          webApp.sendData(data); 
+          localStorage.setItem("last_form", data);
+        });
 
-mainBut.onClick(function(e) {
-document.getElementById("sum-textarea").value = document.getElementById("sum").innerHTML;
-document.getElementById("course-textarea").value = document.getElementById("course").innerHTML;
-myFormData = new FormData(document.getElementById("exchange"));
-data = JSON.stringify(Object.fromEntries(myFormData));
-webApp.sendData(data); 
-});
+        document.getElementById("sum").addEventListener("input", function() {
+            updateCalculation()
+        }, false);
+        	
 
-document.getElementById("sum").addEventListener("input", function() {
-    updateCalculation()
-}, false);
-	
+        document.getElementById("course").addEventListener("input", function() {
+            updateCalculation()
+        }, false);
 
-document.getElementById("course").addEventListener("input", function() {
-    updateCalculation()
-}, false);
-
-dollar.addEventListener("change", function(){console.log(course.innerHTML = "82")})
-rouble.addEventListener("change", function(){console.log(course.innerHTML = "1.2")})
+        dollar.addEventListener("change", function(){console.log(course.innerHTML = "82")})
+        rouble.addEventListener("change", function(){console.log(course.innerHTML = "1.2")})
 	</script>
 </body>
 </html>
