@@ -124,14 +124,22 @@ span.label.sum {
 .cities {
     /*-webkit-mask-image: linear-gradient(-90deg, transparent, #000, transparent);*/
 }
+.spinner button span {
+  background: #5ea7de;
+  color: white;
+  border: none;
+  border-radius: 40px;
+  font-size: 1em;
+  height: 40px;
+  width: 40px;
+  display: block;
+}
 .spinner button {
-    background: #5ea7de;
-    color: white;
-    border: none;
-    border-radius: 40px;
-    font-size: 1em;
-    height: 40px;
-    width: 40px;
+  background: white;
+  border: none;
+  width: 100px;
+  height: 58px;
+  float: left;
 }
 .spinner {
     display: inline-block;
@@ -207,7 +215,7 @@ span.label.sum {
       <div class="row center">
         <div class="col-4">
           <span class="label">Курс</span>
-              <div class="spinner">
+              <div class="spinner" style="float:right;">
                 <button type="button" onclick="decrementValue()">-</button>
               </div>
               <span role="textbox" inputmode="decimal" contenteditable class="editable-number" id="course">83.5</span>
