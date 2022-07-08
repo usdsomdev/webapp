@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel="stylesheet" type="text/css" href="simple-grid.min.css">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<script src="https://telegram.org/js/telegram-web-app.js"></script>
-	<script src='big.min.js'></script>
-	<meta charset="utf-8">
-	<style type="text/css">
+    <link rel="stylesheet" type="text/css" href="simple-grid.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script src='big.min.js'></script>
+    <meta charset="utf-8">
+    <style type="text/css">
 * {
     color: #606060;
 }
@@ -17,8 +17,10 @@ body {
   width: 100%;
 }
 #course {
-	display: inline-block;
-	min-width: 140px;
+  display: inline-block;
+  min-width: 140px;
+  max-width: 198px;
+  overflow: hidden;
 }
 .editable-number {
     font-size: 40pt;
@@ -147,12 +149,12 @@ span.label.sum {
   width: 75px;
   height: 40px;
   float: left;
-	
+    
 }
 .spinner {
-	display: inline-block;
+    display: inline-block;
 }
-	</style>
+    </style>
   <script type="text/javascript">
 
     function incrementValue() {
@@ -183,12 +185,12 @@ span.label.sum {
 <body>
 
     <div class="container">
-	    <form id="exchange">
+        <form id="exchange">
       <div class="row center">
         <div class="col-12">
-        	<span class="label sum">Сумма</span>
+            <span class="label sum">Сумма</span>
           <span role="textbox" inputmode="numeric" contenteditable class="editable-number" id="sum">1000</span>
-		<textarea id="sum-textarea" style="display:none" name="sum"></textarea>
+        <textarea id="sum-textarea" style="display:none" name="sum"></textarea>
           <div class="currencies-wrapper">
             <ul class="currencies radio-buttons">
               <li>
@@ -205,21 +207,21 @@ span.label.sum {
       </div>
       <div class="row center">
         <div class="col-12">
-        	<span class="calculated-sum">83500 сом</span>
+            <span class="calculated-sum">83500 сом</span>
         </div>
       </div>
       <div class="row center">
         <div class="col-12">
-    			<ul class="buy-sell-btns radio-buttons">
+                <ul class="buy-sell-btns radio-buttons">
             <li>
               <input type="radio" id="sell" name="buy-sell" value="sell"/>
               <label for="sell">Продать</label>
             </li>
-    			  <li>
-    			    <input type="radio" id="buy" name="buy-sell" checked="checked" value="buy" />
-    			    <label for="buy">Купить</label>
-    			  </li>
-    		  </ul>
+                  <li>
+                    <input type="radio" id="buy" name="buy-sell" checked="checked" value="buy" />
+                    <label for="buy">Купить</label>
+                  </li>
+              </ul>
         </div>
       </div>
       <div class="row center">
@@ -229,7 +231,7 @@ span.label.sum {
                 <button type="button" onclick="decrementValue()"><span style="float:right;">–</span></button>
               </div>
               <span role="textbox" inputmode="decimal" contenteditable class="editable-number" id="course">83.5</span>
-		<textarea id="course-textarea" style="display:none" name="course"></textarea>
+        <textarea id="course-textarea" style="display:none" name="course"></textarea>
               <div class="spinner">
                 <button type="button" onclick="incrementValue()"><span>+</span></button>
               </div>
@@ -239,28 +241,28 @@ span.label.sum {
       <div class="row">
         <div class="col-12">
           <span class="label">Место</span>
-    			<ul class="cities radio-buttons">
+                <ul class="cities radio-buttons">
             <li>
               <input type="radio" id="a50" name="geo" />
               <label for="a50">Ош</label>
             </li>
-    			  <li>
-    			    <input type="radio" id="a25" name="geo" checked="checked" value="bishkek"/>
-    			    <label for="a25">Бишкек</label>
-    			  </li>
-    			  <li>
-    			    <input type="radio" id="a75" name="geo" value="jalal-abad"/>
-    			    <label for="a75">Жалал-Абад</label>
-    			  </li>
-    			  <li>
-    			    <input type="radio" id="a100" name="geo" value="karakol"/>
-    			    <label for="a100">Каракол</label>
-    			  </li>
-    			  <li>
-    			    <input type="radio" id="a110" name="geo" value="tokmok"/>
-    			    <label for="a110">Токмок</label>
-    			  </li>
-    			</ul>
+                  <li>
+                    <input type="radio" id="a25" name="geo" checked="checked" value="bishkek"/>
+                    <label for="a25">Бишкек</label>
+                  </li>
+                  <li>
+                    <input type="radio" id="a75" name="geo" value="jalal-abad"/>
+                    <label for="a75">Жалал-Абад</label>
+                  </li>
+                  <li>
+                    <input type="radio" id="a100" name="geo" value="karakol"/>
+                    <label for="a100">Каракол</label>
+                  </li>
+                  <li>
+                    <input type="radio" id="a110" name="geo" value="tokmok"/>
+                    <label for="a110">Токмок</label>
+                  </li>
+                </ul>
         </div>
       </div>
       <div class="row">
@@ -284,8 +286,8 @@ span.label.sum {
       </div>
       </div>
     </div>
-	<div id="demo"></div>
-	</form>
+    <div id="demo"></div>
+    </form>
     <script>
         var webApp = window.Telegram.WebApp
         var mainBut = webApp.MainButton
@@ -307,7 +309,7 @@ span.label.sum {
         document.getElementById("sum").addEventListener("input", function() {
             updateCalculation()
         }, false);
-        	
+            
 
         document.getElementById("course").addEventListener("input", function() {
             updateCalculation()
@@ -315,7 +317,7 @@ span.label.sum {
 
         dollar.addEventListener("change", function(){console.log(course.innerHTML = "82")})
         rouble.addEventListener("change", function(){console.log(course.innerHTML = "1.2")})
-	</script>
+    </script>
 </body>
 </html>
 
