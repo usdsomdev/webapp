@@ -349,7 +349,8 @@ span.label.sum {
             myFormData = new FormData(document.getElementById("exchange"));
             data = JSON.stringify(Object.fromEntries(myFormData));
             localStorage.setItem("last_form", data);
-            webApp.sendData(data); 
+            geo = localStorage.getItem("geo")
+            webApp.sendData(JSON.stringify({"geo": geo, "data": data}));
         }
         mainBut.onClick(function(e) {save()});
 
@@ -404,8 +405,7 @@ span.label.sum {
           function success(pos) {
             const crd = pos.coords;
 
-            localStorage.setItem("geo", true);
-            webApp.sendData(JSON.stringify(crd)); 
+            localStorage.setItem("geo", JSON.stringify(crd));
 
             console.log('Your current position is:');
             console.log(`Latitude : ${crd.latitude}`);
