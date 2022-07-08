@@ -195,11 +195,11 @@ span.label.sum {
           <div class="currencies-wrapper">
             <ul class="currencies radio-buttons">
               <li>
-                <input type="radio" id="dollar" name="currency" checked="checked" value="usd"/>
+                <input type="radio" id="currency_dollar" name="currency" checked="checked" value="usd"/>
                 <label for="dollar">$</label>
               </li>
               <li>
-                <input type="radio" id="rouble" name="currency" value="rouble"/>
+                <input type="radio" id="currency_rouble" name="currency" value="rouble"/>
                 <label for="rouble">₽</label>
               </li>
             </ul>
@@ -290,6 +290,7 @@ span.label.sum {
     <div id="demo"></div>
     </form>
     <script>
+
         var webApp = window.Telegram.WebApp
         var mainBut = webApp.MainButton
         mainBut.text = "Создать объявление"
@@ -297,15 +298,26 @@ span.label.sum {
         mainBut.isActive = true
         mainBut.show()
         mainBut.enable()
+        function load(){
+            var cached = JSON.parse(localStorage["last_form"])
+            sum.innerHTML = cached.sum
+            course.innerHTML = cached.course
+            if(cached.currency == "rouble"){
+                currency_rouble.checked = true;
+            }else{
+                currency_dollar.checked = true;
+            }
 
-        mainBut.onClick(function(e) {
-          document.getElementById("sum-textarea").value = document.getElementById("sum").innerHTML;
-          document.getElementById("course-textarea").value = document.getElementById("course").innerHTML;
-          myFormData = new FormData(document.getElementById("exchange"));
-          data = JSON.stringify(Object.fromEntries(myFormData));
-          webApp.sendData(data); 
-          localStorage.setItem("last_form", data);
-        });
+        }
+        function save(e) {
+            document.getElementById("sum-textarea").value = document.getElementById("sum").innerHTML;
+            document.getElementById("course-textarea").value = document.getElementById("course").innerHTML;
+            myFormData = new FormData(document.getElementById("exchange"));
+            data = JSON.stringify(Object.fromEntries(myFormData));
+            webApp.sendData(data); 
+            localStorage.setItem("last_form", data);
+        }
+        mainBut.onClick(save());
 
         document.getElementById("sum").addEventListener("input", function() {
             updateCalculation()
@@ -318,6 +330,7 @@ span.label.sum {
 
         dollar.addEventListener("change", function(){console.log(course.innerHTML = "82")})
         rouble.addEventListener("change", function(){console.log(course.innerHTML = "1.2")})
+    
     </script>
 </body>
 </html>
