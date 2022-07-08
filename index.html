@@ -218,7 +218,7 @@ span.label.sum {
           <span class="label">Место</span>
                 <ul class="cities radio-buttons">
                   <li>
-                    <input type="radio" id="geo_osh" name="geo" />
+                    <input type="radio" id="geo_osh" name="geo" value="osh"/>
                     <label for="geo_osh">Ош</label>
                   </li>
                   <li>
@@ -393,6 +393,45 @@ span.label.sum {
             }
           }
         })
+        function change_geo(e){
+          const options = {
+            enableHighAccuracy: true,
+            timeout: 5000,
+            maximumAge: 0
+          };
+
+          function success(pos) {
+            const crd = pos.coords;
+
+            console.log('Your current position is:');
+            console.log(`Latitude : ${crd.latitude}`);
+            console.log(`Longitude: ${crd.longitude}`);
+            console.log(`More or less ${crd.accuracy} meters.`);
+          }
+
+          function error(err) {
+            console.warn(`ERROR(${err.code}): ${err.message}`);
+            e.preventDefault(e);
+          }
+
+          navigator.geolocation.getCurrentPosition(success, error, options);
+          return false;
+        }
+        geo_osh.addEventListener("click", function(e){
+          return change_geo(e);
+        });
+        geo_bishkek.addEventListener("click", function(e){
+          return change_geo(e);
+        });
+        geo_karakol.addEventListener("click", function(e){
+          return change_geo(e);
+        });
+        geo_jalalabad.addEventListener("click", function(e){
+          return change_geo(e);
+        });
+        geo_tokmok.addEventListener("click", function(e){
+          return change_geo(e);
+        });
     
     </script>
 </body>
