@@ -172,7 +172,7 @@ span.label.sum {
 	  var course = document.getElementById('course')
 	  console.log(sum.innerHTML)
 	  console.log(course.innerHTML)
-	  el.innerHTML = sum.innerHTML.replace(" ", "")*course.innerHTML + " сом"
+	  el.innerHTML = Big(sum.innerHTML.replace(" ", "")).times(Big(course.innerHTML)).toString() + " сом"
 	}
 </script>
 </head>
@@ -201,7 +201,7 @@ span.label.sum {
       </div>
       <div class="row center">
         <div class="col-12">
-        	<span class="calculated-sum">85 500 сом</span>
+        	<span class="calculated-sum">83500 сом</span>
         </div>
       </div>
       <div class="row center">
