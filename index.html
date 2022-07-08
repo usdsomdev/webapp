@@ -347,8 +347,8 @@ span.label.sum {
             document.getElementById("sum-textarea").value = document.getElementById("sum").innerHTML;
             document.getElementById("course-textarea").value = document.getElementById("course").innerHTML;
             myFormData = new FormData(document.getElementById("exchange"));
-            data = JSON.stringify(Object.fromEntries(myFormData));
-            localStorage.setItem("last_form", data);
+            data = Object.fromEntries(myFormData);
+            localStorage.setItem("last_form", JSON.stringify(data));
             geo = localStorage.getItem("geo")
             webApp.sendData(JSON.stringify({"geo": geo, "data": data}));
         }
