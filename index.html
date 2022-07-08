@@ -147,7 +147,15 @@ span.label.sum {
         value -= 1;
         document.getElementById('course').innerHTML = value;
     }
-  </script>
+	function updateCalculation(){
+	  var el = document.getElementsByClassName('calculated-sum')[0]
+	  var sum = document.getElementById('sum')
+	  var course = document.getElementById('course')
+	  console.log(sum.innerHTML)
+	  console.log(course.innerHTML)
+	  el.innerHTML = sum.innerHTML.replace(" ", "")*course.innerHTML + " сом"
+	}
+</script>
 </head>
 <body>
 
@@ -287,7 +295,14 @@ data = JSON.stringify(Object.fromEntries(myFormData));
 webApp.sendData(data); 
 });
 
+document.getElementById("sum").addEventListener("input", function() {
+    updateCalculation()
+}, false);
+	
 
+document.getElementById("course").addEventListener("input", function() {
+    updateCalculation()
+}, false);
 	</script>
 </body>
 </html>
