@@ -154,28 +154,30 @@ span.label.sum {
 }
 	</style>
   <script type="text/javascript">
+
     function incrementValue() {
         var value = Big(document.getElementById('course').innerHTML);
         value = isNaN(value) ? 0 : value;
-        value = (value.plus(0.1)).toString();
+        value = (value.plus(0.1)).toFixed(1).toString();
         document.getElementById('course').innerHTML = value;
-	    updateCalculation();
+      updateCalculation();
     }
     function decrementValue() {
         var value = Big(document.getElementById('course').innerHTML);
         value = isNaN(value) ? 0 : value;
-        value = (value.minus(0.1)).toString();
+        value = (value.minus(0.1)).toFixed(1).toString();
         document.getElementById('course').innerHTML = value;
-	    updateCalculation();
+      updateCalculation();
     }
-	function updateCalculation(){
-	  var el = document.getElementsByClassName('calculated-sum')[0]
-	  var sum = document.getElementById('sum')
-	  var course = document.getElementById('course')
-	  console.log(sum.innerHTML)
-	  console.log(course.innerHTML)
-	  el.innerHTML = Big(sum.innerHTML.replace(" ", "")).times(Big(course.innerHTML)).toString() + " сом"
-	}
+  function updateCalculation(){
+    var el = document.getElementsByClassName('calculated-sum')[0]
+    var sum = document.getElementById('sum')
+    var course = document.getElementById('course')
+    console.log(sum.innerHTML)
+    console.log(course.innerHTML)
+    el.innerHTML = Big(sum.innerHTML.replace(" ", "")).times(Big(course.innerHTML)).toString() + " сом"
+  }
+
 </script>
 </head>
 <body>
