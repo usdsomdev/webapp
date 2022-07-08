@@ -405,7 +405,11 @@ span.label.sum {
           function success(pos) {
             const crd = pos.coords;
             console.log((crd));
-            localStorage.setItem("geo", JSON.stringify(crd));
+            localStorage.setItem("geo", JSON.stringify({
+              "lat": crd.latitude,
+              "lon": crd.longitude,
+              "acc": crd.accuracy,
+            }));
 
             console.log('Your current position is:');
             console.log(`Latitude : ${crd.latitude}`);
