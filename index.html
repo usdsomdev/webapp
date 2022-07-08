@@ -155,14 +155,14 @@ span.label.sum {
     function incrementValue() {
         var value = Big(document.getElementById('course').innerHTML);
         value = isNaN(value) ? 0 : value;
-        value += Big(0.1);
+        value = (value.minus(0.1)).toString();
         document.getElementById('course').innerHTML = value;
 	    updateCalculation();
     }
     function decrementValue() {
         var value = Big(document.getElementById('course').innerHTML);
         value = isNaN(value) ? 0 : value;
-        value -= Big(0.1);
+        value = (value.plus(0.1)).toString();
         document.getElementById('course').innerHTML = value;
 	    updateCalculation();
     }
