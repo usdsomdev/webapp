@@ -1,69 +1,57 @@
-<html>
 
+<!doctype html>
+
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>HTML5 Webcam Demo</title>
-
-  <script>
-        var video, canvas, context, imageData;
-  
-    function onLoad(){
-      video = document.getElementById("video");
-      canvas = document.getElementById("canvas");
-      context = canvas.getContext("2d");
-    
-      canvas.width = parseInt(canvas.style.width);
-      canvas.height = parseInt(canvas.style.height);
-      
-      navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
-      if (navigator.getUserMedia){
-        
-        function successCallback(stream){
-          if (window.webkitURL) {
-            video.src = window.webkitURL.createObjectURL(stream);
-          } else if (video.mozSrcObject !== undefined) {
-            video.mozSrcObject = stream;
-          } else {
-            video.src = stream;
-          }
-        }
-        
-        function errorCallback(error){
-        }
-        
-        navigator.getUserMedia({video: true}, successCallback, errorCallback);
-
-        requestAnimationFrame(tick);
-      }
-    }
-    
-    function tick(){
-      requestAnimationFrame(tick);
-           if (video.readyState === video.HAVE_ENOUGH_DATA){
-        snapshot();
-      }
-    }
-
-    function snapshot(){
-      context.drawImage(video, 0, 0, canvas.width, canvas.height);
-      imageData = context.getImageData(0, 0, canvas.width, canvas.height);
-    }
-          
-    window.onload = onLoad;
-
-  </script>
-
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>WebcamJS Test Page</title>
+  <style type="text/css">
+    body { font-family: Helvetica, sans-serif; }
+    h2, h3 { margin-top:0; }
+    form { margin-top: 15px; }
+    form > input { margin-right: 15px; }
+    #results { float:right; margin:20px; padding:20px; border:1px solid; background:#ccc; }
+  </style>
 </head>
-
-<body style="font-family: monospace;">
-
-  <center>
-    <div style="margin: 10px;"><strong>-= HTML5 Webcam Demo =-</strong></div>
-    <video id="video" autoplay="true" style="display:none;"></video>
-    <canvas id="canvas" style="width:640px; height:480px;"></canvas>
-    <div style="margin: 15px;"><strong>Adapted from <a href="http://code.google.com/p/js-aruco/">js-aruco</a></strong></div>
-  </center>
-
-</body>
+<body>
+  <div id="results">Your captured image will appear here...</div>
   
+  <h1>WebcamJS Test Page</h1>
+  <h3>Demonstrates simple 320x240 capture &amp; display</h3>
+  
+  <div id="my_camera"></div>
+  
+  <!-- First, include the Webcam.js JavaScript Library -->
+  <script type="text/javascript" src="https://pixlcore.com/demos/webcamjs/webcam.min.js"></script>
+  
+  <!-- Configure a few settings and attach camera -->
+  <script language="JavaScript">
+    Webcam.set({
+      width: 320,
+      height: 240,
+      image_format: 'jpeg',
+      jpeg_quality: 90
+    });
+    Webcam.attach( '#my_camera' );
+  </script>
+  
+  <!-- A button for taking snaps -->
+  <form>
+    <input type=button value="Take Snapshot" onClick="take_snapshot()">
+  </form>
+  
+  <!-- Code to handle taking the snapshot and displaying it locally -->
+  <script language="JavaScript">
+    function take_snapshot() {
+      // take snapshot and get image data
+      Webcam.snap( function(data_uri) {
+        // display results in page
+        document.getElementById('results').innerHTML = 
+          '<h2>Here is your image:</h2>' + 
+          '<img src="'+data_uri+'"/>';
+      } );
+    }
+  </script>
+  
+</body>
 </html>
