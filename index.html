@@ -367,11 +367,15 @@ span.label.sum {
         currency_dollar.addEventListener("change", function(){
           var cached = JSON.parse(localStorage.getItem("last_form"))
           if(cached){
-            if(course.innerHTML != cached.course && course.innerHTML != default_rouble){
+            console.log("Cache not empty")
+            if(course.innerHTML == cached.course || course.innerHTML == default_rouble){
               course.innerHTML = default_dollar
-            }            
-          }else{
+            }
+          } else {
+            console.log("Cache empty")
+            if(course.innerHTML == default_rouble){
               course.innerHTML = default_dollar
+            }
           }
         })
         currency_rouble.addEventListener("change", function(){
@@ -379,7 +383,7 @@ span.label.sum {
           var cached = JSON.parse(localStorage.getItem("last_form"))
           if(cached){
             console.log("Cache not empty")
-            if(course.innerHTML != cached.course && course.innerHTML != default_dollar){
+            if(course.innerHTML == cached.course || course.innerHTML == default_dollar){
               course.innerHTML = default_rouble
             }
           } else {
