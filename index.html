@@ -343,15 +343,15 @@ span.label.sum {
             }
         }
         load();
-        // function save(){
-        //     document.getElementById("sum-textarea").value = document.getElementById("sum").innerHTML;
-        //     document.getElementById("course-textarea").value = document.getElementById("course").innerHTML;
-        //     myFormData = new FormData(document.getElementById("exchange"));
-        //     data = JSON.stringify(Object.fromEntries(myFormData));
-        //     localStorage.setItem("last_form", data);
-        //     webApp.sendData(data); 
-        // }
-        // mainBut.onClick(function(e) {save()});
+        function save(){
+            document.getElementById("sum-textarea").value = document.getElementById("sum").innerHTML;
+            document.getElementById("course-textarea").value = document.getElementById("course").innerHTML;
+            myFormData = new FormData(document.getElementById("exchange"));
+            data = JSON.stringify(Object.fromEntries(myFormData));
+            localStorage.setItem("last_form", data);
+            webApp.sendData(data); 
+        }
+        mainBut.onClick(function(e) {save()});
 
         document.getElementById("sum").addEventListener("input", function() {
             updateCalculation()
