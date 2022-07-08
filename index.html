@@ -215,11 +215,11 @@ span.label.sum {
         <div class="col-12">
                 <ul class="buy-sell-btns radio-buttons">
             <li>
-              <input type="radio" id="sell" name="buy-sell" value="sell"/>
+              <input type="radio" id="button_sell" name="buy-sell" value="sell"/>
               <label for="sell">Продать</label>
             </li>
                   <li>
-                    <input type="radio" id="buy" name="buy-sell" checked="checked" value="buy" />
+                    <input type="radio" id="button_buy" name="buy-sell" checked="checked" value="buy" />
                     <label for="buy">Купить</label>
                   </li>
               </ul>
@@ -306,6 +306,11 @@ span.label.sum {
                 currency_rouble.checked = true;
             }else{
                 currency_dollar.checked = true;
+            }
+            if(cached['buy-sell'] == "sell"){
+                button_sell.checked = true;
+            }else{
+                button_buy.checked = true;
             }
 
         }
