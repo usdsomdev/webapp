@@ -265,6 +265,13 @@ span.label.sum {
     </form>
     <script>
 
+        var webApp = window.Telegram.WebApp
+        var mainBut = webApp.MainButton
+        mainBut.text = "Создать объявление"
+        mainBut.isVisible = true
+        mainBut.isActive = true
+        mainBut.show()
+        mainBut.enable()
 
           function incrementValue() {
               var value = Big(document.getElementById('course').innerHTML);
@@ -333,14 +340,6 @@ span.label.sum {
             }
         }
         load();
-
-        var webApp = window.Telegram.WebApp
-        var mainBut = webApp.MainButton
-        mainBut.text = "Создать объявление"
-        mainBut.isVisible = true
-        mainBut.isActive = true
-        mainBut.show()
-        mainBut.enable()
         function save(){
             document.getElementById("sum-textarea").value = document.getElementById("sum").innerHTML;
             document.getElementById("course-textarea").value = document.getElementById("course").innerHTML;
