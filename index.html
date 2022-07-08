@@ -298,22 +298,21 @@ span.label.sum {
         mainBut.isActive = true
         mainBut.show()
         mainBut.enable()
-        function load(){
-            var cached = JSON.parse(localStorage["last_form"])
-            sum.innerHTML = cached.sum
-            course.innerHTML = cached.course
-            if(cached.currency == "rouble"){
-                currency_rouble.checked = true;
-            }else{
-                currency_dollar.checked = true;
-            }
-            if(cached['buy-sell'] == "sell"){
-                button_sell.checked = true;
-            }else{
-                button_buy.checked = true;
-            }
-
-        }
+        // function load(){
+        //     var cached = JSON.parse(localStorage["last_form"])
+        //     sum.innerHTML = cached.sum
+        //     course.innerHTML = cached.course
+        //     if(cached.currency == "rouble"){
+        //         currency_rouble.checked = true;
+        //     }else{
+        //         currency_dollar.checked = true;
+        //     }
+        //     if(cached['buy-sell'] == "sell"){
+        //         button_sell.checked = true;
+        //     }else{
+        //         button_buy.checked = true;
+        //     }
+        // }
         function save(e) {
             document.getElementById("sum-textarea").value = document.getElementById("sum").innerHTML;
             document.getElementById("course-textarea").value = document.getElementById("course").innerHTML;
