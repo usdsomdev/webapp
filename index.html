@@ -297,6 +297,9 @@ span.label.sum {
         }
         function load(){
             var cached = JSON.parse(localStorage.getItem("last_form"))
+            if(!cached){
+              return;
+            }
             sum.innerHTML = cached.sum
             course.innerHTML = cached.course
             updateCalculation()
