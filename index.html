@@ -142,7 +142,7 @@ span.label.sum {
   background: white;
   border: none;
   width: 100px;
-  height: 75px;
+  height: 40px;
   float: left;
 	
 }
@@ -152,16 +152,16 @@ span.label.sum {
 	</style>
   <script type="text/javascript">
     function incrementValue() {
-        var value = parseFloat(document.getElementById('course').innerHTML, 10);
+        var value = Number(document.getElementById('course').innerHTML, 10);
         value = isNaN(value) ? 0 : value;
         value += 1;
         document.getElementById('course').innerHTML = value;
 	    updateCalculation();
     }
     function decrementValue() {
-        var value = parseFloat(document.getElementById('course').innerHTML, 10);
+        var value = Number(document.getElementById('course').innerHTML, 10);
         value = isNaN(value) ? 0 : value;
-        value -= 1;
+        value -= 0.1;
         document.getElementById('course').innerHTML = value;
 	    updateCalculation();
     }
