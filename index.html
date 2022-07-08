@@ -156,32 +156,6 @@ span.label.sum {
     height: 55px;
 }
     </style>
-  <script type="text/javascript">
-
-    function incrementValue() {
-        var value = Big(document.getElementById('course').innerHTML);
-        value = isNaN(value) ? 0 : value;
-        value = (value.plus(0.1)).toFixed(1).toString();
-        document.getElementById('course').innerHTML = value;
-      updateCalculation();
-    }
-    function decrementValue() {
-        var value = Big(document.getElementById('course').innerHTML);
-        value = isNaN(value) ? 0 : value;
-        value = (value.minus(0.1)).toFixed(1).toString();
-        document.getElementById('course').innerHTML = value;
-      updateCalculation();
-    }
-  function updateCalculation(){
-    var el = document.getElementsByClassName('calculated-sum')[0]
-    var sum = document.getElementById('sum')
-    var course = document.getElementById('course')
-    console.log(sum.innerHTML)
-    console.log(course.innerHTML)
-    el.innerHTML = Big(sum.innerHTML.replace(" ", "")).times(Big(course.innerHTML)).toString() + " сом"
-  }
-
-</script>
 </head>
 <body>
 
@@ -208,7 +182,7 @@ span.label.sum {
       </div>
       <div class="row center">
         <div class="col-12">
-            <span class="calculated-sum">83500 сом</span>
+            <span class="calculated-sum" id="calculated_sum">83500 сом</span>
         </div>
       </div>
       <div class="row center">
@@ -243,25 +217,25 @@ span.label.sum {
         <div class="col-12">
           <span class="label">Место</span>
                 <ul class="cities radio-buttons">
-            <li>
-              <input type="radio" id="a50" name="geo" />
-              <label for="a50">Ош</label>
-            </li>
                   <li>
-                    <input type="radio" id="a25" name="geo" checked="checked" value="bishkek"/>
-                    <label for="a25">Бишкек</label>
+                    <input type="radio" id="geo_osh" name="geo" />
+                    <label for="geo_osh">Ош</label>
                   </li>
                   <li>
-                    <input type="radio" id="a75" name="geo" value="jalal-abad"/>
-                    <label for="a75">Жалал-Абад</label>
+                    <input type="radio" id="geo_bishkek" name="geo" checked="checked" value="bishkek"/>
+                    <label for="geo_bishkek">Бишкек</label>
                   </li>
                   <li>
-                    <input type="radio" id="a100" name="geo" value="karakol"/>
-                    <label for="a100">Каракол</label>
+                    <input type="radio" id="geo_jalalabad" name="geo" value="jalal-abad"/>
+                    <label for="geo_jalalabad">Жалал-Абад</label>
                   </li>
                   <li>
-                    <input type="radio" id="a110" name="geo" value="tokmok"/>
-                    <label for="a110">Токмок</label>
+                    <input type="radio" id="geo_karakol" name="geo" value="karakol"/>
+                    <label for="geo_karakol">Каракол</label>
+                  </li>
+                  <li>
+                    <input type="radio" id="geo_tokmok" name="geo" value="tokmok"/>
+                    <label for="geo_tokmok">Токмок</label>
                   </li>
                 </ul>
         </div>
@@ -271,16 +245,16 @@ span.label.sum {
           <span class="label">Способ расчета</span>
           <ul class="methods radio-buttons">
             <li>
-              <input type="radio" id="card" name="methods" value="card"/>
-              <label for="card">Карта</label>
+              <input type="radio" id="method_card" name="methods" value="card"/>
+              <label for="method_card">Карта</label>
             </li>
             <li>
-              <input type="radio" id="cash" name="methods" checked="checked" value="cash"/>
-              <label for="cash">Наличные</label>
+              <input type="radio" id="method_cash" name="methods" checked="checked" value="cash"/>
+              <label for="method_cash">Наличные</label>
             </li>
             <li>
-              <input type="radio" id="transfer" name="methods" value="transfer"/>
-              <label for="transfer">Перевод</label>
+              <input type="radio" id="method_transfer" name="methods" value="transfer"/>
+              <label for="method_transfer">Перевод</label>
             </li>
           </ul>
         </div>
@@ -291,6 +265,75 @@ span.label.sum {
     </form>
     <script>
 
+
+          function incrementValue() {
+              var value = Big(document.getElementById('course').innerHTML);
+              value = isNaN(value) ? 0 : value;
+              value = (value.plus(0.1)).toFixed(1).toString();
+              document.getElementById('course').innerHTML = value;
+            updateCalculation();
+          }
+          function decrementValue() {
+              var value = Big(document.getElementById('course').innerHTML);
+              value = isNaN(value) ? 0 : value;
+              value = (value.minus(0.1)).toFixed(1).toString();
+              document.getElementById('course').innerHTML = value;
+            updateCalculation();
+          }
+        function updateCalculation(){
+          var el = document.getElementsByClassName('calculated-sum')[0]
+          var sum = document.getElementById('sum')
+          var course = document.getElementById('course')
+          console.log(sum.innerHTML)
+          console.log(course.innerHTML)
+          el.innerHTML = Big(sum.innerHTML.replace(" ", "")).times(Big(course.innerHTML)).toString() + " сом"
+        }
+        function load(){
+            var cached = JSON.parse(localStorage.getItem("last_form"))
+            sum.innerHTML = cached.sum
+            course.innerHTML = cached.course
+            updateCalculation()
+            if(cached.currency == "rouble"){
+                currency_rouble.checked = true;
+            }else{
+                currency_dollar.checked = true;
+            }
+            if(cached['buy-sell'] == "sell"){
+                button_sell.checked = true;
+            }else{
+                button_buy.checked = true;
+            }
+            switch(cached.geo){
+              case "osh":
+                geo_osh.checked = true;
+                break;
+              case "bishkek":
+                geo_bishkek.checked = true;
+                break;
+              case "jalalabad":
+                geo_jalalabad.checked = true;
+                break;
+              case "karakol":
+                geo_karakol.checked = true;
+                break;
+              case "tokmok":
+                geo_tokmok.checked = true;
+                break;
+            }
+            switch(cached.methods){
+              case "card":
+                method_card.checked = true;
+                break;
+              case "cash":
+                method_cash.checked = true;
+                break;
+              case "transfer":
+                method_transfer.checked = true;
+                break;
+            }
+        }
+        load();
+
         var webApp = window.Telegram.WebApp
         var mainBut = webApp.MainButton
         mainBut.text = "Создать объявление"
@@ -298,22 +341,7 @@ span.label.sum {
         mainBut.isActive = true
         mainBut.show()
         mainBut.enable()
-        // function load(){
-        //     var cached = JSON.parse(localStorage["last_form"])
-        //     sum.innerHTML = cached.sum
-        //     course.innerHTML = cached.course
-        //     if(cached.currency == "rouble"){
-        //         currency_rouble.checked = true;
-        //     }else{
-        //         currency_dollar.checked = true;
-        //     }
-        //     if(cached['buy-sell'] == "sell"){
-        //         button_sell.checked = true;
-        //     }else{
-        //         button_buy.checked = true;
-        //     }
-        // }
-        function save(e) {
+        function save(){
             document.getElementById("sum-textarea").value = document.getElementById("sum").innerHTML;
             document.getElementById("course-textarea").value = document.getElementById("course").innerHTML;
             myFormData = new FormData(document.getElementById("exchange"));
@@ -321,7 +349,7 @@ span.label.sum {
             localStorage.setItem("last_form", data);
             webApp.sendData(data); 
         }
-        mainBut.onClick(save());
+        mainBut.onClick(function(e) {save()});
 
         document.getElementById("sum").addEventListener("input", function() {
             updateCalculation()
@@ -332,8 +360,33 @@ span.label.sum {
             updateCalculation()
         }, false);
 
-        currency_dollar.addEventListener("change", function(){console.log(course.innerHTML = "82")})
-        currency_rouble.addEventListener("change", function(){console.log(course.innerHTML = "1.2")})
+        var default_dollar = "83.5";
+        var default_rouble = "1.2";
+        currency_dollar.addEventListener("change", function(){
+          var cached = JSON.parse(localStorage.getItem("last_form"))
+          if(cached){
+            if(course.innerHTML != cached.course && course.innerHTML != default_rouble){
+              course.innerHTML = default_dollar
+            }            
+          }else{
+              course.innerHTML = default_dollar
+          }
+        })
+        currency_rouble.addEventListener("change", function(){
+          console.log("You choose rouble!")
+          var cached = JSON.parse(localStorage.getItem("last_form"))
+          if(cached){
+            console.log("Cache not empty")
+            if(course.innerHTML != cached.course && course.innerHTML != default_dollar){
+              course.innerHTML = default_rouble
+            }
+          } else {
+            console.log("Cache empty")
+            if(course.innerHTML == default_dollar){
+              course.innerHTML = default_rouble
+            }
+          }
+        })
     
     </script>
 </body>
