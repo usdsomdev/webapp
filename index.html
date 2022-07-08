@@ -152,16 +152,16 @@ span.label.sum {
 	</style>
   <script type="text/javascript">
     function incrementValue() {
-        var value = Number(document.getElementById('course').innerHTML, 10);
+        var value = Number(document.getElementById('course').innerHTML);
         value = isNaN(value) ? 0 : value;
-        value += 1;
+        value += Number(0.1);
         document.getElementById('course').innerHTML = value;
 	    updateCalculation();
     }
     function decrementValue() {
-        var value = Number(document.getElementById('course').innerHTML, 10);
+        var value = Number(document.getElementById('course').innerHTML);
         value = isNaN(value) ? 0 : value;
-        value -= 0.1;
+        value -= Number(0.1);
         document.getElementById('course').innerHTML = value;
 	    updateCalculation();
     }
