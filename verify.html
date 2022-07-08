@@ -1,197 +1,182 @@
-<!DOCTYPE html>
-<html>
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-GB" lang="en-GB">
 <head>
-    <link rel="stylesheet" type="text/css" href="simple-grid.min.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <script src='big.min.js'></script>
-    <meta charset="utf-8">
-    <style type="text/css">
-* {
-    color: #606060;
-}
-body {
-    font-size: 11pt;
-}
-.container {
-  width: 100%;
-}
-#course {
-  display: inline-block;
-  min-width: 140px;
-  max-width: 198px;
-  overflow: hidden;
-}
-.editable-number {
-    font-size: 40pt;
-    display: inline-block;
-    max-width: 100%;
-    text-align: center;
-    border: none;
-    line-height: 75px;
-    margin: 0 5px;
-}
-span.editable-number:focus-visible {
-    outline: none;
-}
-input[type=number]::-webkit-inner-spin-button, 
-input[type=number]::-webkit-outer-spin-button { 
-  -webkit-appearance: none; 
-  margin: 0; 
-}
-.calculated-sum {
-    color: #CFD6DD;
-    font-size: 0.8em;
-    margin-top: -20px;
-    display: block;
-}
-.btn {
-    background: #5EA7DE;
-    border-radius: 40px;
-    color: white;
-    text-align: center;
-    padding: 4px 26px;
-}
-.label {
-    display: block;
-    color: #A3ABB3;
-    font-size: 1em;
-    margin-top: 10px
-}
-.radio-buttons {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow-x: scroll;
-  overflow-y: hidden;
-  white-space: nowrap;
-  direction: rtl;
-}
-.currencies-wrapper::-webkit-scrollbar, .radio-buttons::-webkit-scrollbar { 
-    display: none;  /* Safari and Chrome */
-}
-.radio-buttons li {
-  margin: 0 5px 0 0;
-  height: 40px;
-  display: inline-block;
-  /*position: relative;*/
-}
-.radio-buttons.currencies {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    display: inline-block;
-    height: 45px;
-    width: 95px;
-}
-.currencies li {
-    display: block;
-    float: left;
-}
-.radio-buttons label,
-.radio-buttons input {
-  display: block;
-  -webkit-tap-highlight-color: transparent;
-}
-.radio-buttons input[type="radio"] {
-    opacity: 0.01;
-    z-index: 100;
-    height: 1px;
-    margin: 0;
-}
-.radio-buttons input[type="radio"]:checked+label,
-.Checked+label {
-  background: #5EA7DE;
-  color: white;
-}
-.radio-buttons label {
-  border-radius: 40px;
-  cursor: pointer;
-  z-index: 90;
-  background: #DDD;
-  color: #ACACAC;
-  padding: 5px 30px;
-}
-.radio-buttons.currencies label {
-  padding: 5px 15px;
-}
-span.label.sum {
-    text-align: center;
-}
-.row.center {
-    text-align: center;
-}
-.currencies-wrapper {
-    /* width: 79px; */
-    overflow-x: scroll;
-    display: inline-block;
-    position: absolute;
-    margin-top: 20px;
-    /*-webkit-mask-image: linear-gradient(90deg, #000 60%, transparent);*/
-}
-.cities {
-    /*-webkit-mask-image: linear-gradient(-90deg, transparent, #000, transparent);*/
-}
-.spinner button span {
-  background: #5ea7de;
-  color: white;
-  border: none;
-  border-radius: 40px;
-  font-size: 1em;
-  height: 40px;
-  width: 40px;
-  line-height: 37px;
-  display: block;
-}
-.spinner button {
-  background: white;
-  border: none;
-  width: 75px;
-  height: 40px;
-  float: left;
-    
-}
-.spinner {
-    display: inline-block;
-    height: 55px;
-}
-    </style>
+<meta charset="UTF-8" />
+<title>HTML5 webcam demo with getUserMedia() - Doc’ Alex</title>
+<meta name="description" content="HTML5 webcam " />
+
+<style type="text/css">
+
+</style>
 </head>
+
 <body>
 
-<div id="container">
-<video width="200" height="200" autoplay="true" id="video">
-</video>
-</div>
-<button onclick="capture()">Capture</button>  <br> </br>
-<canvas id="canvas" style="overflow:auto"></canvas>
-<br></br>
-<p> Image Converted to String: </p>
-<p id="printresult"></p>
-</center>
-<script>
-var video = document.querySelector("#video");
- if (navigator.mediaDevices.getUserMedia) {
-      navigator.mediaDevices.getUserMedia({ video: true })
-        .then(function (stream) {
-          video.srcObject = stream;
-        })
-        .catch(function (err0r) {
-          console.log("Something went wrong!");
-        });
- }
- var resultb64="";
- function capture() {        
-    var canvas = document.getElementById('canvas');     
-    var video = document.getElementById('video');
-    canvas.width = 200;
-    canvas.height = 200;
-    canvas.getContext('2d').drawImage(video, 0, 0, 200,200);  
-    document.getElementById("printresult").innerHTML = canvas.toDataURL(); 
- }
-  document.getElementById("printresult").innerHTML = resultb64;
-</script>
+<h1>HTML5 webcam </h1>
+<h4>Opera 12, Opera 12 Mobile, Chrome (Firefox)</h4>
+<pre id="preLog">Access to camera</pre>
+
+<video id="video" autoplay="autoplay" src="" />
+
+
+
+<p>
+<input type="button" id="buttonStart" value="Start" onclick="start()" />
+<input type="button" id="buttonStop" value="Stop" onclick="stop()" disabled="" />
+<input type="button" id="buttonSnap" value="Take screenshot" onclick="snapshot()" disabled="" />
+
+  </p>
+
+<p>
+
+<canvas id="canvas" />
+</p>
+
+
+<script type="text/javascript"> //<![CDATA[
+"use strict";
+var video = document.getElementById('video');
+var canvas = document.getElementById('canvas');
+var videoStream = null;
+var preLog = document.getElementById('preLog');
+        video.addEventListener('play', function(){
+         var       cw = video.clientWidth;
+          var      ch = video.clientHeight;
+                canvas.width = cw;
+                canvas.height = ch;
+         var context = canvas.getContext('2d');
+                draw(video,context,cw,ch);
+        },false);
+
+function log(text)
+{
+  if (preLog) preLog.textContent += ('\n' + text);
+  else alert(text);
+}
+
+function snapshot()
+{
+  canvas.width = video.videoWidth;
+  canvas.height = video.videoHeight;
+  canvas.getContext('2d').drawImage(video, 0, 0);
+}
+
+function noStream()
+{
+  log('Access to camera was denied!');
+}
+
+function stop()
+{
+  var myButton = document.getElementById('buttonStop');
+  if (myButton) myButton.disabled = true;
+  myButton = document.getElementById('buttonSnap');
+  if (myButton) myButton.disabled = true;
+  if (videoStream)
+  {
+    if (videoStream.stop) videoStream.stop();
+    else if (videoStream.msStop) videoStream.msStop();
+    videoStream.onended = null;
+    videoStream = null;
+  }
+  if (video)
+  {
+    video.onerror = null;
+    video.pause();
+    if (video.mozSrcObject)
+      video.mozSrcObject = null;
+    video.src = "";
+  }
+  myButton = document.getElementById('buttonStart');
+  if (myButton) myButton.disabled = false;
+}
+
+function gotStream(stream)
+{
+  var myButton = document.getElementById('buttonStart');
+  if (myButton) myButton.disabled = true;
+  videoStream = stream;
+  log('Got stream.');
+  video.onerror = function ()
+  {
+    log('video.onerror');
+    if (video) stop();
+  };
+  stream.onended = noStream;
+  if (window.webkitURL) video.src = window.webkitURL.createObjectURL(stream);
+  else if (video.mozSrcObject !== undefined)
+  {//FF18a
+    video.mozSrcObject = stream;
+    video.play();
+  }
+  else if (navigator.mozGetUserMedia)
+  {//FF16a, 17a
+    video.src = stream;
+    video.play();
+  }
+  else if (window.URL) video.src = window.URL.createObjectURL(stream);
+  else video.src = stream;
+  myButton = document.getElementById('buttonSnap');
+  if (myButton) myButton.disabled = false;
+  myButton = document.getElementById('buttonStop');
+  if (myButton) myButton.disabled = false;
+}
+
+function start()
+{
+  if ((typeof window === 'undefined') || (typeof navigator === 'undefined')) log('This page needs a Web browser with the objects window.* and navigator.*!');
+  else if (!(video && canvas)) log('HTML context error!');
+  else
+  {
+    log('Get user media…');
+    if (navigator.getUserMedia) navigator.getUserMedia({video:true}, gotStream, noStream);
+    else if (navigator.oGetUserMedia) navigator.oGetUserMedia({video:true}, gotStream, noStream);
+    else if (navigator.mozGetUserMedia) navigator.mozGetUserMedia({video:true}, gotStream, noStream);
+    else if (navigator.webkitGetUserMedia) navigator.webkitGetUserMedia({video:true}, gotStream, noStream);
+    else if (navigator.msGetUserMedia) navigator.msGetUserMedia({video:true, audio:false}, gotStream, noStream);
+    else log('getUserMedia() not available from your Web browser!');
+  }
+}
+
+
+function draw(v,c,cw,ch) {
+        if(v.paused || v.ended)        return false;
+        // First, draw it into the backing canvas
+        c.drawImage(v,0,0,cw,ch);
+        // Grab the pixel data from the backing canvas
+        idata = c.getImageData(0,0,cw,ch);
+        var data = idata.data;
+        var w = idata.width;
+        var limit = data.length
+    
+        // Helligkeit Farbe +- Offset
+    db_gain=-18;
+        // db_gain = parseFloat (document.getElementById("gain").value);
+    var gain = pegel(Math.abs(db_gain));
+        for(var i = 0; i < limit; i++) {
+                if( i%4 == 3 ) continue;
+        if( db_gain < 0 ) {
+                data[i] =  data[i] - gain ;
+        } else{
+        data[i] =  data[i] + gain ;
+        }
+
+                         }
+        // Draw the pixels onto the visible canvas
+        c.putImageData(idata,0,0);
+        // Start over!
+        setTimeout(draw,20,v,c,cw,ch);
+}
+   // Pegel berechnung dbFS
+function  pegel(wert) {  
+   return  Math.pow(10, wert /20  ); // 0.5 
+} 
+
+function  db(wert) {   
+   return 20 * Math.log(wert+0.000001) / Math.log(10); // -6dbFS
+}
+
+//]]></script>
 </body>
 </html>
-
-
