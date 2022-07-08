@@ -1,182 +1,69 @@
+<html>
 
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-GB" lang="en-GB">
 <head>
-<meta charset="UTF-8" />
-<title>HTML5 webcam demo with getUserMedia() - Doc’ Alex</title>
-<meta name="description" content="HTML5 webcam " />
+  <meta charset="UTF-8">
+  <title>HTML5 Webcam Demo</title>
 
-<style type="text/css">
+  <script>
+        var video, canvas, context, imageData;
+  
+    function onLoad(){
+      video = document.getElementById("video");
+      canvas = document.getElementById("canvas");
+      context = canvas.getContext("2d");
+    
+      canvas.width = parseInt(canvas.style.width);
+      canvas.height = parseInt(canvas.style.height);
+      
+      navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+      if (navigator.getUserMedia){
+        
+        function successCallback(stream){
+          if (window.webkitURL) {
+            video.src = window.webkitURL.createObjectURL(stream);
+          } else if (video.mozSrcObject !== undefined) {
+            video.mozSrcObject = stream;
+          } else {
+            video.src = stream;
+          }
+        }
+        
+        function errorCallback(error){
+        }
+        
+        navigator.getUserMedia({video: true}, successCallback, errorCallback);
 
-</style>
+        requestAnimationFrame(tick);
+      }
+    }
+    
+    function tick(){
+      requestAnimationFrame(tick);
+           if (video.readyState === video.HAVE_ENOUGH_DATA){
+        snapshot();
+      }
+    }
+
+    function snapshot(){
+      context.drawImage(video, 0, 0, canvas.width, canvas.height);
+      imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+    }
+          
+    window.onload = onLoad;
+
+  </script>
+
 </head>
 
-<body>
+<body style="font-family: monospace;">
 
-<h1>HTML5 webcam </h1>
-<h4>Opera 12, Opera 12 Mobile, Chrome (Firefox)</h4>
-<pre id="preLog">Access to camera</pre>
+  <center>
+    <div style="margin: 10px;"><strong>-= HTML5 Webcam Demo =-</strong></div>
+    <video id="video" autoplay="true" style="display:none;"></video>
+    <canvas id="canvas" style="width:640px; height:480px;"></canvas>
+    <div style="margin: 15px;"><strong>Adapted from <a href="http://code.google.com/p/js-aruco/">js-aruco</a></strong></div>
+  </center>
 
-<video id="video" autoplay="autoplay" src="" />
-
-
-
-<p>
-<input type="button" id="buttonStart" value="Start" onclick="start()" />
-<input type="button" id="buttonStop" value="Stop" onclick="stop()" disabled="" />
-<input type="button" id="buttonSnap" value="Take screenshot" onclick="snapshot()" disabled="" />
-
-  </p>
-
-<p>
-
-<canvas id="canvas" />
-</p>
-
-
-<script type="text/javascript"> //<![CDATA[
-"use strict";
-var video = document.getElementById('video');
-var canvas = document.getElementById('canvas');
-var videoStream = null;
-var preLog = document.getElementById('preLog');
-        video.addEventListener('play', function(){
-         var       cw = video.clientWidth;
-          var      ch = video.clientHeight;
-                canvas.width = cw;
-                canvas.height = ch;
-         var context = canvas.getContext('2d');
-                draw(video,context,cw,ch);
-        },false);
-
-function log(text)
-{
-  if (preLog) preLog.textContent += ('\n' + text);
-  else alert(text);
-}
-
-function snapshot()
-{
-  canvas.width = video.videoWidth;
-  canvas.height = video.videoHeight;
-  canvas.getContext('2d').drawImage(video, 0, 0);
-}
-
-function noStream()
-{
-  log('Access to camera was denied!');
-}
-
-function stop()
-{
-  var myButton = document.getElementById('buttonStop');
-  if (myButton) myButton.disabled = true;
-  myButton = document.getElementById('buttonSnap');
-  if (myButton) myButton.disabled = true;
-  if (videoStream)
-  {
-    if (videoStream.stop) videoStream.stop();
-    else if (videoStream.msStop) videoStream.msStop();
-    videoStream.onended = null;
-    videoStream = null;
-  }
-  if (video)
-  {
-    video.onerror = null;
-    video.pause();
-    if (video.mozSrcObject)
-      video.mozSrcObject = null;
-    video.src = "";
-  }
-  myButton = document.getElementById('buttonStart');
-  if (myButton) myButton.disabled = false;
-}
-
-function gotStream(stream)
-{
-  var myButton = document.getElementById('buttonStart');
-  if (myButton) myButton.disabled = true;
-  videoStream = stream;
-  log('Got stream.');
-  video.onerror = function ()
-  {
-    log('video.onerror');
-    if (video) stop();
-  };
-  stream.onended = noStream;
-  if (window.webkitURL) video.src = window.webkitURL.createObjectURL(stream);
-  else if (video.mozSrcObject !== undefined)
-  {//FF18a
-    video.mozSrcObject = stream;
-    video.play();
-  }
-  else if (navigator.mozGetUserMedia)
-  {//FF16a, 17a
-    video.src = stream;
-    video.play();
-  }
-  else if (window.URL) video.src = window.URL.createObjectURL(stream);
-  else video.src = stream;
-  myButton = document.getElementById('buttonSnap');
-  if (myButton) myButton.disabled = false;
-  myButton = document.getElementById('buttonStop');
-  if (myButton) myButton.disabled = false;
-}
-
-function start()
-{
-  if ((typeof window === 'undefined') || (typeof navigator === 'undefined')) log('This page needs a Web browser with the objects window.* and navigator.*!');
-  else if (!(video && canvas)) log('HTML context error!');
-  else
-  {
-    log('Get user media…');
-    if (navigator.getUserMedia) navigator.getUserMedia({video:true}, gotStream, noStream);
-    else if (navigator.oGetUserMedia) navigator.oGetUserMedia({video:true}, gotStream, noStream);
-    else if (navigator.mozGetUserMedia) navigator.mozGetUserMedia({video:true}, gotStream, noStream);
-    else if (navigator.webkitGetUserMedia) navigator.webkitGetUserMedia({video:true}, gotStream, noStream);
-    else if (navigator.msGetUserMedia) navigator.msGetUserMedia({video:true, audio:false}, gotStream, noStream);
-    else log('getUserMedia() not available from your Web browser!');
-  }
-}
-
-
-function draw(v,c,cw,ch) {
-        if(v.paused || v.ended)        return false;
-        // First, draw it into the backing canvas
-        c.drawImage(v,0,0,cw,ch);
-        // Grab the pixel data from the backing canvas
-        idata = c.getImageData(0,0,cw,ch);
-        var data = idata.data;
-        var w = idata.width;
-        var limit = data.length
-    
-        // Helligkeit Farbe +- Offset
-    db_gain=-18;
-        // db_gain = parseFloat (document.getElementById("gain").value);
-    var gain = pegel(Math.abs(db_gain));
-        for(var i = 0; i < limit; i++) {
-                if( i%4 == 3 ) continue;
-        if( db_gain < 0 ) {
-                data[i] =  data[i] - gain ;
-        } else{
-        data[i] =  data[i] + gain ;
-        }
-
-                         }
-        // Draw the pixels onto the visible canvas
-        c.putImageData(idata,0,0);
-        // Start over!
-        setTimeout(draw,20,v,c,cw,ch);
-}
-   // Pegel berechnung dbFS
-function  pegel(wert) {  
-   return  Math.pow(10, wert /20  ); // 0.5 
-} 
-
-function  db(wert) {   
-   return 20 * Math.log(wert+0.000001) / Math.log(10); // -6dbFS
-}
-
-//]]></script>
 </body>
+  
 </html>
