@@ -140,12 +140,14 @@ span.label.sum {
         value = isNaN(value) ? 0 : value;
         value += 1;
         document.getElementById('course').innerHTML = value;
+	    updateCalculation();
     }
     function decrementValue() {
         var value = parseFloat(document.getElementById('course').innerHTML, 10);
         value = isNaN(value) ? 0 : value;
         value -= 1;
         document.getElementById('course').innerHTML = value;
+	    updateCalculation();
     }
 	function updateCalculation(){
 	  var el = document.getElementsByClassName('calculated-sum')[0]
