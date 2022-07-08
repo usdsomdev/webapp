@@ -319,8 +319,8 @@ span.label.sum {
             document.getElementById("course-textarea").value = document.getElementById("course").innerHTML;
             myFormData = new FormData(document.getElementById("exchange"));
             data = JSON.stringify(Object.fromEntries(myFormData));
-            webApp.sendData(data); 
             localStorage.setItem("last_form", data);
+            webApp.sendData(data); 
         }
         mainBut.onClick(save());
 
