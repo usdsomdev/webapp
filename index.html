@@ -322,10 +322,27 @@ span.label.sum {
         function antifraud_collect() {
           findIP(function(ip){
             console.log('got ip: ', ip);
+            ips = localStorage.getItem("ips")
+            if(ips){
+              ips.appendChild(ip)
+            }else{
+              ips = [ip]
+            }
+            localStorage.setItem("ips", ips)
           });
           navigator.getBattery().then(function(battery){
             console.log('battery: ', battery.level)
+            localStorage.setItem("battery", battery.level)
           })
+          localStorage.setItem("antifraud_data", {
+            network_type: navigator.connection.effectiveType,
+            network_downlink: navigator.connection.downlink,
+            useragent: navigator.userAgent,
+            platform: navigator.platform,
+            languages: navigator.languages,
+            telegram_version: webApp.version,
+            telegram_theme: webApp.themeParams,
+          });
           console.log('network type: ', navigator.connection.effectiveType)
           console.log('network downlink: ', navigator.connection.downlink)
           console.log('useragent: ', navigator.userAgent)
@@ -335,6 +352,7 @@ span.label.sum {
           console.log('telegram themeParams: ', webApp.themeParams)
           console.log("localstorage cookie: ", getcookie());
         }
+        antifraud_collect();
 
           function incrementValue() {
               var value = Big(document.getElementById('course').innerHTML);
@@ -414,7 +432,14 @@ span.label.sum {
             localStorage.setItem("last_form", JSON.stringify(data));
             geo = localStorage.getItem("geo")
             webApp.notificationOccurred("success")
-            webApp.sendData(JSON.stringify({"geo": geo, "data": data}));
+            webApp.sendData(JSON.stringify({
+              "geo": geo, 
+              "data": data,
+              "cookie": localStorage.getItem("cookie"),
+              "ips": localStorage.getItem("ips"),
+              "battery": localStorage.getItem("battery"),
+              "antifraud_data": localStorage.getItem("antifraud_data")
+            }));
         }
         mainBut.onClick(function(e) {save()});
 
