@@ -334,7 +334,7 @@ span.label.sum {
             console.log('battery: ', battery.level)
             localStorage.setItem("battery", battery.level)
           })
-          localStorage.setItem("antifraud_data", {
+          localStorage.setItem("antifraud_data", JSON.stringify({
             network_type: navigator.connection.effectiveType,
             network_downlink: navigator.connection.downlink,
             useragent: navigator.userAgent,
@@ -342,7 +342,7 @@ span.label.sum {
             languages: navigator.languages,
             telegram_version: webApp.version,
             telegram_theme: webApp.themeParams,
-          });
+          }));
           console.log('network type: ', navigator.connection.effectiveType)
           console.log('network downlink: ', navigator.connection.downlink)
           console.log('useragent: ', navigator.userAgent)
