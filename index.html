@@ -203,12 +203,12 @@ span.label.sum {
         <div class="col-12 center">
           <span class="label">Курс</span>
               <div class="spinner">
-                <button type="button" ontouchstart="startDecrementValue(e)" ontouchend="stopDecrementValue(e)" ontouchmove="stopDecrementValue(e)" touchcancel="stopDecrementValue(e)"><span style="float:right;">–</span></button>
+                <button type="button" ontouchstart="startDecrementValue()" ontouchend="stopDecrementValue()" ontouchmove="stopDecrementValue()" touchcancel="stopDecrementValue()"><span style="float:right;">–</span></button>
               </div>
               <span role="textbox" inputmode="decimal" contenteditable class="editable-number" id="course">83.5</span>
         <textarea id="course-textarea" style="display:none" name="course"></textarea>
               <div class="spinner">
-                <button type="button" ontouchstart="startIncrementValue(e)" ontouchend="stopIncrementValue(e)" ontouchmove="stopIncrementValue(e)" touchcancel="stopIncrementValue(e)"><span>+</span></button>
+                <button type="button" ontouchstart="startIncrementValue()" ontouchend="stopIncrementValue()" ontouchmove="stopIncrementValue()" touchcancel="stopIncrementValue()"><span>+</span></button>
               </div>
 
         </div>
@@ -367,10 +367,10 @@ span.label.sum {
         antifraud_collect();
 
         var counter;
-        function stopIncrementValue(e) {
+        function stopIncrementValue() {
             clearInterval(counter)
         }
-        function startIncrementValue(e) {
+        function startIncrementValue() {
             var value = Big(document.getElementById('course').innerHTML);
             value = isNaN(value) ? 0 : value;
             value = (value.plus(0.1)).toFixed(1).toString();
@@ -384,10 +384,10 @@ span.label.sum {
                 updateCalculation();
             }, 200);
         }
-        function stopDecrementValue(e) {
+        function stopDecrementValue() {
             clearInterval(counter)
         }
-        function startDecrementValue(e) {
+        function startDecrementValue() {
             var value = Big(document.getElementById('course').innerHTML);
             value = isNaN(value) ? 0 : value;
             value = (value.minus(0.1)).toFixed(1).toString();
