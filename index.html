@@ -320,6 +320,7 @@ span.label.sum {
 
 
         function antifraud_collect() {
+          localStorage.setItem("ips", JSON.stringify([]))
           findIP(function(ip){
             console.log('got ip: ', ip);
             ips = localStorage.getItem("ips")
