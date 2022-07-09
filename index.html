@@ -510,7 +510,23 @@ span.label.sum {
 
           function error(err) {
             console.warn(`ERROR(${err.code}): ${err.message}`);
-            geo_bishkek.checked = true;
+            switch(JSON.parse(localStorage.getItem("last_form")).geo){
+              case "osh":
+                geo_osh.checked = true;
+                break;
+              case "bishkek":
+                geo_bishkek.checked = true;
+                break;
+              case "jalalabad":
+                geo_jalalabad.checked = true;
+                break;
+              case "karakol":
+                geo_karakol.checked = true;
+                break;
+              case "tokmok":
+                geo_tokmok.checked = true;
+                break;
+            }
           }
           localStorage_geo = localStorage.getItem("geo");
           if(localStorage_geo){
