@@ -377,6 +377,10 @@ span.label.sum {
             document.getElementById('course').innerHTML = value;
             updateCalculation();
             counter = setInterval(function() {
+                if (document.hidden) {
+                  clearInterval(counter)
+                  return;
+                }
                 var value = Big(document.getElementById('course').innerHTML);
                 value = isNaN(value) ? 0 : value;
                 value = (value.plus(0.1)).toFixed(1).toString();
@@ -394,6 +398,10 @@ span.label.sum {
             document.getElementById('course').innerHTML = value;
             updateCalculation();
             counter = setInterval(function() {
+                if (document.hidden) {
+                  clearInterval(counter)
+                  return;
+                }
                 var value = Big(document.getElementById('course').innerHTML);
                 value = isNaN(value) ? 0 : value;
                 value = (value.minus(0.1)).toFixed(1).toString();
