@@ -264,7 +264,8 @@ span.label.sum {
     <div id="demo"></div>
     </form>
     <script>
-        if(!navigator.userAgentData.mobile){
+        var is_close_require = new URL(window.location.href).searchParams.get("close") == "1";
+        if(!navigator.userAgentData.mobile || is_close_require){
           webApp.close();
         }
 
