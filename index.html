@@ -324,6 +324,7 @@ span.label.sum {
             console.log('got ip: ', ip);
             ips = localStorage.getItem("ips")
             if(ips){
+              ips = JSON.parse(ips)
               ips.push(ip)
             }else{
               ips = [ip]
