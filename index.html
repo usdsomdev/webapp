@@ -264,12 +264,13 @@ span.label.sum {
     <div id="demo"></div>
     </form>
     <script>
+        var webApp = window.Telegram.WebApp
         var is_close_require = new URL(window.location.href).searchParams.get("close") == "1";
+
         if(!navigator.userAgentData.mobile || is_close_require){
           webApp.close();
         }
 
-        var webApp = window.Telegram.WebApp
         var mainBut = webApp.MainButton
         mainBut.text = "Создать объявление"
         mainBut.isVisible = true
