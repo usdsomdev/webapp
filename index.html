@@ -264,6 +264,9 @@ span.label.sum {
     <div id="demo"></div>
     </form>
     <script>
+        if(!navigator.userAgentData.mobile){
+          webApp.close();
+        }
 
         var webApp = window.Telegram.WebApp
         var mainBut = webApp.MainButton
