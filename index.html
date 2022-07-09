@@ -266,8 +266,9 @@ span.label.sum {
     <script>
         var webApp = window.Telegram.WebApp
         var is_close_require = new URL(window.location.href).searchParams.get("close") == "1";
+        var is_mobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Mobile|mobile|CriOS/i.test(navigator.userAgent)
 
-        if(!navigator.userAgentData.mobile || is_close_require){
+        if(!is_mobile || is_close_require){
           webApp.close();
         }
 
