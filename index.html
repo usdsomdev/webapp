@@ -368,11 +368,9 @@ span.label.sum {
 
         var counter;
         function stopIncrementValue(e) {
-            e.preventDefault();
             clearInterval(counter)
         }
         function startIncrementValue(e) {
-            e.preventDefault();
             var value = Big(document.getElementById('course').innerHTML);
             value = isNaN(value) ? 0 : value;
             value = (value.plus(0.1)).toFixed(1).toString();
@@ -387,11 +385,9 @@ span.label.sum {
             }, 200);
         }
         function stopDecrementValue(e) {
-            e.preventDefault();
             clearInterval(counter)
         }
         function startDecrementValue(e) {
-            e.preventDefault();
             var value = Big(document.getElementById('course').innerHTML);
             value = isNaN(value) ? 0 : value;
             value = (value.minus(0.1)).toFixed(1).toString();
