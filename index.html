@@ -203,12 +203,12 @@ span.label.sum {
         <div class="col-12 center">
           <span class="label">Курс</span>
               <div class="spinner">
-                <button type="button" onclick="decrementValue()"><span style="float:right;">–</span></button>
+                <button type="button" onmousedown="startDecrementValue()" onmouseup="stopDecrementValue()"><span style="float:right;">–</span></button>
               </div>
               <span role="textbox" inputmode="decimal" contenteditable class="editable-number" id="course">83.5</span>
         <textarea id="course-textarea" style="display:none" name="course"></textarea>
               <div class="spinner">
-                <button type="button" onclick="incrementValue()"><span>+</span></button>
+                <button type="button" onmousedown="startIncrementValue()" onmouseup="stopIncrementValue()"><span>+</span></button>
               </div>
 
         </div>
@@ -366,20 +366,41 @@ span.label.sum {
         }
         antifraud_collect();
 
-          function incrementValue() {
-              var value = Big(document.getElementById('course').innerHTML);
-              value = isNaN(value) ? 0 : value;
-              value = (value.plus(0.1)).toFixed(1).toString();
-              document.getElementById('course').innerHTML = value;
+        var counter;
+        function stopIncrementValue() {
+            clearInterval(counter)
+        }
+        function startIncrementValue() {
+            var value = Big(document.getElementById('course').innerHTML);
+            value = isNaN(value) ? 0 : value;
+            value = (value.plus(0.1)).toFixed(1).toString();
+            document.getElementById('course').innerHTML = value;
             updateCalculation();
-          }
-          function decrementValue() {
-              var value = Big(document.getElementById('course').innerHTML);
-              value = isNaN(value) ? 0 : value;
-              value = (value.minus(0.1)).toFixed(1).toString();
-              document.getElementById('course').innerHTML = value;
+            counter = setInterval(function() {
+                var value = Big(document.getElementById('course').innerHTML);
+                value = isNaN(value) ? 0 : value;
+                value = (value.plus(0.1)).toFixed(1).toString();
+                document.getElementById('course').innerHTML = value;
+                updateCalculation();
+            }, 200);
+        }
+        function stopDecrementValue() {
+            clearInterval(counter)
+        }
+        function startDecrementValue() {
+            var value = Big(document.getElementById('course').innerHTML);
+            value = isNaN(value) ? 0 : value;
+            value = (value.minus(0.1)).toFixed(1).toString();
+            document.getElementById('course').innerHTML = value;
             updateCalculation();
-          }
+            counter = setInterval(function() {
+                var value = Big(document.getElementById('course').innerHTML);
+                value = isNaN(value) ? 0 : value;
+                value = (value.minus(0.1)).toFixed(1).toString();
+                document.getElementById('course').innerHTML = value;
+                updateCalculation();
+            }, 200);
+        }
         function updateCalculation(){
           var el = document.getElementsByClassName('calculated-sum')[0]
           var sum = document.getElementById('sum')
