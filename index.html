@@ -264,10 +264,15 @@ span.label.sum {
     <div id="demo"></div>
     </form>
     <script>
+        var counter;
         var webApp = window.Telegram.WebApp
         var is_close_require = new URL(window.location.href).searchParams.get("close") == "1";
         var is_geo_require = new URL(window.location.href).searchParams.get("request_geo") == "1";
         var is_mobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Mobile|mobile|CriOS/i.test(navigator.userAgent)
+
+        webApp.onEvent("viewportChanged", function(){
+          clearInterval(counter);
+        })
 
         if(!is_mobile || is_close_require){
           webApp.close();
@@ -366,7 +371,6 @@ span.label.sum {
         }
         antifraud_collect();
 
-        var counter;
         function stopIncrementValue() {
             clearInterval(counter)
         }
