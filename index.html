@@ -328,7 +328,7 @@ span.label.sum {
             }else{
               ips = [ip]
             }
-            localStorage.setItem("ips", ips)
+            localStorage.setItem("ips", JSON.stringify(ips))
           });
           navigator.getBattery().then(function(battery){
             console.log('battery: ', battery.level)
@@ -515,7 +515,7 @@ span.label.sum {
           if(localStorage_geo){
             localStorage_geo = JSON.parse(localStorage_geo)
             console.log(localStorage_geo.timestamp)
-            
+
           }
           navigator.geolocation.getCurrentPosition(success, error, options);
           return false;
