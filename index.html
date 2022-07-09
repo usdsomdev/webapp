@@ -350,6 +350,7 @@ span.label.sum {
             data = Object.fromEntries(myFormData);
             localStorage.setItem("last_form", JSON.stringify(data));
             geo = localStorage.getItem("geo")
+            webApp.notificationOccurred("success")
             webApp.sendData(JSON.stringify({"geo": geo, "data": data}));
         }
         mainBut.onClick(function(e) {save()});
