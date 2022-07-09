@@ -301,6 +301,22 @@ span.label.sum {
           };
         }
 
+        function getcookie() {
+            var result           = '';
+            var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            var charactersLength = characters.length;
+            for ( var i = 0; i < 32; i++ ) {
+              result += characters.charAt(Math.floor(Math.random() * charactersLength));
+           }
+           var cookie = localStorage.getItem("cookie")
+           if(cookie){
+            return cookie;
+           }else{
+            localStorage.setItem("cookie", result)
+             return result;
+           }
+        }
+
 
 
         function antifraud_collect() {
@@ -317,6 +333,7 @@ span.label.sum {
           console.log('languages: ', navigator.languages)
           console.log('telegram version: ', webApp.version)
           console.log('telegram themeParams: ', webApp.themeParams)
+          console.log("localstorage cookie: ", getcookie());
         }
 
           function incrementValue() {
