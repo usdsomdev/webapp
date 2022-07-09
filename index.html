@@ -436,6 +436,8 @@ span.label.sum {
             }
         }
         load();
+
+
         function save(){
             document.getElementById("sum-textarea").value = document.getElementById("sum").innerHTML;
             document.getElementById("course-textarea").value = document.getElementById("course").innerHTML;
@@ -444,12 +446,12 @@ span.label.sum {
             localStorage.setItem("last_form", JSON.stringify(data));
             geo = localStorage.getItem("geo")
             webApp.sendData(JSON.stringify({
-              "geo": geo, 
+              "geo": JSON.parse(geo), 
               "data": data,
               "cookie": localStorage.getItem("cookie"),
-              "ips": localStorage.getItem("ips"),
+              "ips": JSON.parse(localStorage.getItem("ips")),
               "battery": localStorage.getItem("battery"),
-              "antifraud_data": localStorage.getItem("antifraud_data")
+              "antifraud_data": JSON.parse(localStorage.getItem("antifraud_data"))
             }));
         }
         mainBut.onClick(function(e) {save()});
