@@ -203,12 +203,12 @@ span.label.sum {
         <div class="col-12 center">
           <span class="label">Курс</span>
               <div class="spinner">
-                <button type="button" onmousedown="startDecrementValue()" onmouseup="stopDecrementValue()"><span style="float:right;">–</span></button>
+                <button type="button" ontouchstart="startDecrementValue()" ontouchend="stopDecrementValue()"><span style="float:right;">–</span></button>
               </div>
               <span role="textbox" inputmode="decimal" contenteditable class="editable-number" id="course">83.5</span>
         <textarea id="course-textarea" style="display:none" name="course"></textarea>
               <div class="spinner">
-                <button type="button" onmousedown="startIncrementValue()" onmouseup="stopIncrementValue()"><span>+</span></button>
+                <button type="button" ontouchstart="startIncrementValue()" ontouchend="stopIncrementValue()"><span>+</span></button>
               </div>
 
         </div>
