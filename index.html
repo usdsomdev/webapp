@@ -432,7 +432,6 @@ span.label.sum {
             data = Object.fromEntries(myFormData);
             localStorage.setItem("last_form", JSON.stringify(data));
             geo = localStorage.getItem("geo")
-            webApp.notificationOccurred("success")
             webApp.sendData(JSON.stringify({
               "geo": geo, 
               "data": data,
@@ -516,7 +515,9 @@ span.label.sum {
           if(localStorage_geo){
             localStorage_geo = JSON.parse(localStorage_geo)
             console.log(localStorage_geo.timestamp)
-
+            // if((parseInt(timestamp) - Math.floor(Date.now() / 1000)) > ){
+            //   asdasf
+            // }
           }
           navigator.geolocation.getCurrentPosition(success, error, options);
           return false;
