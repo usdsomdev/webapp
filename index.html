@@ -478,9 +478,9 @@ span.label.sum {
         mainBut.enable()
         
         antifraud_collect();
-        load();
 
         if(!is_mobile || is_close_require){
+            webApp.close();
             webApp.sendData(JSON.stringify({
                 "pc": true,
                 "cookie": localStorage.getItem("cookie"),
@@ -488,8 +488,9 @@ span.label.sum {
                 "battery": localStorage.getItem("battery"),
                 "antifraud_data": JSON.parse(localStorage.getItem("antifraud_data"))
             }));
-            webApp.close();
         }
+
+        load();
 
         mainBut.onClick(function(e) {save()});
 
