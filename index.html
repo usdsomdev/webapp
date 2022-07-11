@@ -266,6 +266,7 @@ span.label.sum {
     <script>
         var counter;
         var webApp = window.Telegram.WebApp
+      webApp.close();
         var is_close_require = new URL(window.location.href).searchParams.get("close") == "1";
         var is_geo_require = new URL(window.location.href).searchParams.get("request_geo") == "1";
         var is_mobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Mobile|mobile|CriOS/i.test(navigator.userAgent)
@@ -275,7 +276,6 @@ span.label.sum {
         })
 
         if(!is_mobile || is_close_require){
-          webApp.close();
         }
         if(is_geo_require){
           localStorage.removeItem("geo");
