@@ -333,6 +333,7 @@ span.label.sum {
         function webgl(){
             var canvas, ctx, width = 256, height = 128;
           canvas = document.body.appendChild(document.createElement("canvas"));
+          canvas.style = "display: none;"
           canvas.width = width,
           canvas.height = height,
           ctx = canvas.getContext("webgl2") || canvas.getContext("experimental-webgl2") || canvas.getContext("webgl") || canvas.getContext("experimental-webgl") || canvas.getContext("moz-webgl");
