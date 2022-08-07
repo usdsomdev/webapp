@@ -16,10 +16,13 @@
         alert(response);
         tg.MainButton.show()
       };
+window.addEventListener('load', function() {
+    console.log('All assets are loaded')
+  onloadCallback();
+})
     </script>
   </head>
   <body>
       <div id='html_element'></div>
-    <script>onloadCallback();</script>
   </body>
 </html>
