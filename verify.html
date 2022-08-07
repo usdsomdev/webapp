@@ -20,6 +20,12 @@ window.addEventListener('load', function() {
     console.log('All assets are loaded')
   onloadCallback();
 })
+      
+              function ok(){
+            tg.sendData(JSON.stringify({"hello": "world"}));
+        }
+        tg.MainButton.onClick(function(e) {ok()});
+      
     </script>
     <style>
     
