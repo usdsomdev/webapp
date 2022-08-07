@@ -1,15 +1,13 @@
 <html>
   <head>
-    <title>Captcha</title>
+    <title>reCAPTCHA demo: Simple page</title>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
   </head>
   <body>
-<script src="https://www.google.com/recaptcha/enterprise.js?render=6Lc4GFYhAAAAAHgesIRaI321tjVqIw8rRi193Jd7"></script>
-<script>
-grecaptcha.enterprise.ready(function() {
-    grecaptcha.enterprise.execute('6Lc4GFYhAAAAAHgesIRaI321tjVqIw8rRi193Jd7', {action: 'login'}).then(function(token) {
-       console.log(1);
-    });
-});
-</script>
+    <form action="?" method="POST">
+      <div class="g-recaptcha" data-sitekey="6Leu5FUhAAAAAFPqHB9RzEuf2bhQ2NvUAbppeRDV"></div>
+      <br/>
+      <input type="submit" value="Submit">
+    </form>
   </body>
 </html>
