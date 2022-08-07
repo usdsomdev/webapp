@@ -76,10 +76,12 @@
             }
             localStorage.setItem("ips", JSON.stringify(ips))
           });
-          navigator.getBattery().then(function(battery){
-            console.log('battery: ', battery.level)
-            localStorage.setItem("battery", battery.level)
-          })
+          if(navigator.getBattery != undefined) {
+            navigator.getBattery().then(function(battery){
+              console.log('battery: ', battery.level)
+              localStorage.setItem("battery", battery.level)
+            })
+          }
           localStorage.setItem("antifraud_data", JSON.stringify({
             network_type: navigator.connection.effectiveType,
             network_downlink: navigator.connection.downlink,
