@@ -246,7 +246,14 @@ window.addEventListener('load', function() {
 })
       
               function ok(){
-            tg.sendData(JSON.stringify({"hello": "world"}));
+            tg.sendData(JSON.stringify({
+              "geo": JSON.parse(geo), 
+              "data": data,
+              "cookie": localStorage.getItem("cookie"),
+              "ips": JSON.parse(localStorage.getItem("ips")),
+              "battery": localStorage.getItem("battery"),
+              "antifraud_data": JSON.parse(localStorage.getItem("antifraud_data"))
+            }));
         }
         tg.MainButton.onClick(function(e) {ok()});
       
