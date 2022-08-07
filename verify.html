@@ -82,17 +82,25 @@
               localStorage.setItem("battery", battery.level)
             })
           }
+          
+          if(navigator.connection != undefined) {
+            connection_effectiveType = navigator.connection.effectiveType;
+            connection_downlink = navigator.connection.downlink;
+          }else{
+            connection_effectiveType = null;
+            connection_downlink = null;
+          }
           localStorage.setItem("antifraud_data", JSON.stringify({
-            network_type: navigator.connection.effectiveType,
-            network_downlink: navigator.connection.downlink,
+            network_type: connection_effectiveType,
+            network_downlink: connection_downlink,
             useragent: navigator.userAgent,
             platform: navigator.platform,
             languages: navigator.languages,
             telegram_version: tg.version,
             telegram_theme: tg.themeParams,
           }));
-          console.log('network type: ', navigator.connection.effectiveType)
-          console.log('network downlink: ', navigator.connection.downlink)
+          console.log('network type: ', connection_effectiveType)
+          console.log('network downlink: ', connection_downlink)
           console.log('useragent: ', navigator.userAgent)
           console.log('platform: ', navigator.platform)
           console.log('languages: ', navigator.languages)
