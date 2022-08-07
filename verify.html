@@ -16,7 +16,9 @@
         alert(response);
         tg.MainButton.show()
       };
-      $(document).ready(onloadCallback);
+window.document.onload = function(e){ 
+    onloadCallback();
+}
     </script>
   </head>
   <body>
